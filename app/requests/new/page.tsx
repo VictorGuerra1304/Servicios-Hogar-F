@@ -12,7 +12,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { ArrowLeft, Upload, Plus } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { supabase } from "@/utils/supabaseClient"
+import { getSupabaseClient } from '@/utils/supabaseClient'
+//import { supabase } from "@/utils/supabaseClient"
 import { createClient } from '@supabase/supabase-js';
 
 export const distritosLima = [
@@ -30,6 +31,7 @@ export const distritosLima = [
 export default function NewRequestPage() {
   const router = useRouter()
   const [userData, setUserData] = useState<any>(null)
+  const supabase = getSupabaseClient()
  
   const categories = [
     "Gasfitería",
