@@ -13,7 +13,6 @@ import { ArrowLeft, Upload, Plus } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { getSupabaseClient } from '@/utils/supabaseClient'
-//import { supabase } from "@/utils/supabaseClient"
 import { createClient } from '@supabase/supabase-js';
 
 export const distritosLima = [
@@ -28,10 +27,11 @@ export const distritosLima = [
   "Santiago de Surco", "Surquillo", "Villa El Salvador", "Villa María del Triunfo"
 ];
 
+export const dynamic = 'force-dynamic';
+
 export default function NewRequestPage() {
   const router = useRouter()
   const [userData, setUserData] = useState<any>(null)
-  const supabase = getSupabaseClient()
  
   const categories = [
     "Gasfitería",
@@ -74,6 +74,7 @@ export default function NewRequestPage() {
   });
 
   const uploadImage = async (file: File) => {
+    const supabase = getSupabaseClient()
     const { data, error } = await supabase.storage
       .from("imagenes-servicios")
       .upload(`servicios/${file.name}`, file)
@@ -177,6 +178,7 @@ export default function NewRequestPage() {
 
   const [imagenesUrls, setImagenesUrls] = useState<string[]>([]);
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const supabase = getSupabaseClient()
     const files = e.target.files;
     if (!files) return;
 
