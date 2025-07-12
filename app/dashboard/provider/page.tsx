@@ -65,6 +65,9 @@ export default function ProviderDashboard() {
 
   useEffect(() => {
     const fetchServicios = async () => {
+
+      if (!userData?.id_proveedor) return;
+
       try {
         const res = await fetch("/api/servicios");
         if (!res.ok) throw new Error("Error al obtener servicios");

@@ -9,8 +9,8 @@ import { Search, Plus, Clock, CheckCircle, Star, MessageCircle, User, LogOut } f
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-import { supabase } from "@/utils/supabaseClient"
 import {Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle} from "@/components/ui/dialog"
+import Image from "next/image"
 
 export default function ClientDashboard() {
   const router = useRouter()
@@ -44,6 +44,8 @@ export default function ClientDashboard() {
   ]
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+
   const [selectedTipoServicio, setSelectedTipoServicio] = useState<number | null>(null);
   const [proveedores, setProveedores] = useState<any[]>([]);
 
@@ -291,18 +293,24 @@ export default function ClientDashboard() {
                                 )
                                 :                                
                                 (proveedores.map((proveedor) => (
-                                    <div
-                                      key={proveedor.id_proveedor}
-                                      className="flex justify-between items-center p-3 border rounded-lg hover:bg-gray-100"
-                                    >
+                                    <div key={proveedor.id_proveedor} className="grid grid-cols-3 gap-4 items-start p-4 border rounded-lg hover:bg-gray-100">
+
                                       <div>
                                         <p className="font-medium">{proveedor.nombre}</p>
                                         <p className="text-sm text-gray-500">{proveedor.edad}</p>
                                         <p className="text-sm text-gray-500">{proveedor.distrito}</p>
                                       </div>
-                                      <Button size="sm" variant="secondary" onClick={() => alert(`Iniciar chat con ${proveedor.nombre}`)} >
-                                        Chatear
-                                      </Button>
+                                      <div className="flex items-center justify-center h-full w-full">
+                                        <Button size="sm" className="bg-blue-600 hover:bg-blue-700 text-white" onClick={() => alert(`Iniciar chat con ${proveedor.nombre}`)} >
+                                          Chatear
+                                        </Button>
+                                      </div>
+                                      <div className="flex items-center justify-center h-full w-full">
+                                        <Button size="sm" variant="default" onClick={() => alert(`Contrataste a ${proveedor.nombre}`)} >
+                                          Contratar
+                                        </Button>
+                                      </div>
+
                                     </div>
                                   ))
                                 )}
@@ -313,8 +321,29 @@ export default function ClientDashboard() {
 
                           </Dialog>
 
-                          {/* <Button size="sm" variant="outline" className="border-blue-500 text-blue-600 hover:bg-blue-50"> Chat </Button> */}
-                          <Button size="sm" variant="outline" className="border-gray-500 text-gray-600 hover:bg-gray-50"> Detalles </Button>
+                          <Button size="sm" variant="outline" className="border-gray-500 text-gray-600 hover:bg-gray-50" onClick={() => setShowModal(true)}> Detalle del Contrato </Button>
+
+                            {showModal && (
+                              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                                <div className="bg-white p-4 rounded-lg shadow-lg max-w-xl w-full relative">
+                                  <button
+                                    className="absolute top-2 right-2 text-gray-600 hover:text-black"
+                                    onClick={() => setShowModal(false)}
+                                  >
+                                    ✕
+                                  </button>
+                                  <h2 className="text-lg font-bold mb-4 text-center">Detalle del Contrato</h2>
+                                  <Image
+                                    src="/Contrato.png"
+                                    alt="Contrato"
+                                    width={250}
+                                    height={150}
+                                    className="rounded-lg mx-auto"
+                                  />
+                                </div>
+                              </div>
+                            )}
+
                         </div>
                         
                       </div>

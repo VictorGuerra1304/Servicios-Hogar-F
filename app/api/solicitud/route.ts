@@ -57,13 +57,13 @@ export async function POST(req: NextRequest) {
     ]
     );
 
-    const id_servicio_domestestico = result.rows[0].id_serv_domest;
+    const id_servicio_domestico = result.rows[0].id_serv_domest;
 
     // Paso 2: insertar en imagenes
     for (const url of imagen) {
     await client.query(
         `INSERT INTO imagenes (id_serv_domest, url) VALUES ($1, $2)`,
-        [id_servicio_domestestico, url]
+        [id_servicio_domestico, url]
     );
     }
 

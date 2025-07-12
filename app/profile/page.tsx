@@ -68,6 +68,18 @@ export default function ProfilePage() {
 
   const averageRating = reviews.reduce((sum, review) => sum + review.rating, 0) / reviews.length
 
+  const usuario = userType;
+  const isPremium = userData.tipo_plan; // Asegúrate de que sea booleano
+
+  let returnLink = "";
+  
+  if (usuario ==="client") {
+    returnLink = `/dashboard/client/${isPremium ? "premium" : "free"}`;
+  } else if(usuario === "provider") {
+    returnLink = `/dashboard/provider`;
+  }
+  
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -75,7 +87,7 @@ export default function ProfilePage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Link href={`/dashboard/${userType}`} className="flex items-center text-blue-600 hover:text-blue-800">
+              <Link href={returnLink} className="flex items-center text-blue-600 hover:text-blue-800">
                 <ArrowLeft className="h-5 w-5 mr-2" />
                 Volver
               </Link>
@@ -170,7 +182,7 @@ export default function ProfilePage() {
                 </CardContent>
               </Card>
 
-              {/* Edit Form */}
+              {/* Edit Form
               {isEditing && (
                 <Card>
                   <CardHeader>
@@ -205,7 +217,7 @@ export default function ProfilePage() {
                     </div>
                   </CardContent>
                 </Card>
-              )}
+              )} */}
 
               {/* Services (for providers) */}
               {userType === "provider" && (
