@@ -177,8 +177,9 @@ export default function NewRequestPage() {
   }
 
   const [imagenesUrls, setImagenesUrls] = useState<string[]>([]);
+  
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const supabase = getSupabaseClient()
+    //const supabase = getSupabaseClient()
     const files = e.target.files;
     if (!files) return;
 
@@ -200,7 +201,8 @@ export default function NewRequestPage() {
       };
       
       reader.readAsDataURL(file);
-
+    }  
+    /*
       try {
         const { data, error } = await supabase.storage
           .from("imagenes-servicios")
@@ -225,12 +227,12 @@ export default function NewRequestPage() {
     }
 
       // Actualiza las URLs reales en el estado global
-      setImagenesUrls((prev) => [...prev, ...urls]);
+      setImagenesUrls((prev) => [...prev, ...urls]); */
 
       // Limpia el valor del input para permitir volver a seleccionar las mismas imágenes
       e.target.value = "";
 
-  };
+  }; 
 
   useEffect(() => {
     const storedData = localStorage.getItem("userData")
