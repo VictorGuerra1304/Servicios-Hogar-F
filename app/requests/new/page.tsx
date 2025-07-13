@@ -444,7 +444,7 @@ export default function NewRequestPage() {
                     )}
 
                   </div>
-                </div>*
+                </div>
 
                 <div></div><div></div><div></div>
                 <div></div><div></div><div></div>
@@ -460,8 +460,10 @@ export default function NewRequestPage() {
                   </Link>
                 </div>
                 
+                <div></div>
                 <div></div><div></div><div></div>
                 <div></div><div></div><div></div>
+                <div></div>
 
                 <div>
                   <h4 className="text-center font-medium text-blue-900 mb-2 text-xs">¿Cómo funciona?</h4>
