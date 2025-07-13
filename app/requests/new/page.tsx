@@ -142,10 +142,12 @@ export default function NewRequestPage() {
       console.log("✅ Resultado del backend:", result);
 
       if (!response.ok) {
+        console.error("❌ Error desde backend:", result.error);
         const { error } = await response.json();
         throw new Error(error || "Error desconocido");
       }
 
+      console.log("✅ Solicitud registrada:", result.message);
       alert("Servicio registrado correctamente");
       //router.push("/dashboard/client"); //que identifique al registrar si es premium o free
 
@@ -202,6 +204,7 @@ export default function NewRequestPage() {
       
       reader.readAsDataURL(file);
     }  
+    
     /*
       try {
         const { data, error } = await supabase.storage
@@ -441,7 +444,7 @@ export default function NewRequestPage() {
                     )}
 
                   </div>
-                </div>
+                </div>*
 
                 <div></div><div></div><div></div>
                 <div></div><div></div><div></div>
