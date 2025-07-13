@@ -129,6 +129,15 @@ export default function NewRequestPage() {
     
     // 2. Enviar todo al backend
     try {
+      
+      const payload = {
+        ...formData, // nombre, dirección, tipo_servicio, etc.
+        imagen: uploadedUrls,
+        id_cliente: userData?.id_cliente,
+      };
+
+      console.log("🧪 Datos enviados al backend:", payload); 
+      
       const response = await fetch("/api/solicitud", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
