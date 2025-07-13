@@ -126,6 +126,7 @@ export default function NewRequestPage() {
     }
 
     console.log("📦 uploadedUrls:", uploadedUrls);
+    
     // 2. Enviar todo al backend
     try {
       const response = await fetch("/api/solicitud", {
@@ -143,8 +144,7 @@ export default function NewRequestPage() {
 
       if (!response.ok) {
         console.error("❌ Error desde backend:", result.error);
-        const { error } = await response.json();
-        throw new Error(error || "Error desconocido");
+        throw new Error(result.error || "Error desconocido");
       }
 
       console.log("✅ Solicitud registrada:", result.message);
@@ -157,9 +157,8 @@ export default function NewRequestPage() {
       else {
         router.push("/dashboard/client/premium");
       }
-
-
     } 
+
     catch (error) {
       console.error("Error al registrar:", error);
       alert("Hubo un error al registrar el servicio");

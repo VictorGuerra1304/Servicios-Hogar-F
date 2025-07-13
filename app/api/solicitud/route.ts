@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Client } from "pg";
+console.log("🚀 Entró al archivo solicitud/route.ts");
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
